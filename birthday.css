@@ -1,0 +1,64 @@
+body {
+        margin: 0;
+        padding: 0;
+        background: #f8f3ff;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* FIRST POPUP */
+    #popup {
+        position: absolute;
+        background: white;
+        width: 85%;
+        padding: 25px;
+        text-align: center;
+        font-size: 22px;
+        border-radius: 18px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.12);
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    /* COOLDOWN SCREEN */
+    #cooldown {
+        display: none;
+        text-align: center;
+        animation: fadeIn 0.7s ease-in-out;
+    }
+
+    #cooldown-text {
+        font-size: 18px;
+        color: #6d3cff;
+        margin-bottom: 8px;
+    }
+
+    #counter {
+        font-size: 38px;
+        font-weight: bold;
+        color: #5215ff;
+    }
+
+    /* STYLISH BUTTON */
+    #forYouBtn {
+        display: none;
+        margin-top: 25px;
+        padding: 14px 32px;
+        border: none;
+        border-radius: 50px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #6d3cff, #b07aff);
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(109,60,255,0.4);
+        cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: scale(0.95);}
+        to   {opacity: 1; transform: scale(1);}
+    }

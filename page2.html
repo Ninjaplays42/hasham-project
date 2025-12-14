@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: pink;
+    background: url("page2-bg.jpg") no-repeat center center;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Bottom fixed balloon/picture */
+#baloon-1{
+    height: 230px;
+    width: 230px;
+    background-color: transparent;
+    position: fixed;
+    bottom: 30px;
+    background-image: url(baloon-fixed.png);
+    background-size: contain;
+}
+
+/* Card container like your screenshot */
+.card {
+    background: #fff0f7;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 30px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+ #H-B{
+        width: 190px;
+        height: 110px;
+        margin-left: 110px;
+        background-color: transparent;
+        background-image: url(happy-2.png);
+        background-size: cover;
+    }
+
+/* Happy Birthday text */
+.card h1 {
+    font-size: 24px;
+    color: #d1006c;
+    margin-bottom: 5px;
+}
+
+.card h2 {
+    font-size: 18px;
+    color: #a60085;
+    margin-bottom: 20px;
+}
+
+/* Middle purple/blue gradient rectangle */
+.tapArea {
+    width: 80%;
+    margin: 0 auto 20px auto;
+    padding: 25px 0;
+    background: linear-gradient(135deg, #6d3cff, #b07aff);
+    border-radius: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transform: rotate(-3deg); /* tilted slightly */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.tapArea:hover {
+    transform: rotate(-3deg) scale(1.05);
+}
+
+.tapArea i {
+    font-size: 22px;
+}
+
+/* Hidden message below rectangle */
+.message {
+    display: none;
+    font-size: 16px;
+    color: #6a0487;
+    line-height: 1.5;
+    margin-top: 15px;
+    position: relative;
+    z-index: 3;
+}
+
+/* Card confetti animation */
+.fall {
+    position: absolute;
+    font-size: 22px;
+    animation: fallDown 3s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120px) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="baloon-1"></div>
+
+<div class="card">
+    <h1 id="H-B"></h1>
+    
+
+    <div class="tapArea" id="tapArea">
+        Tap to open your card <i>🎁</i>
+    </div>
+
+    <div class="message" id="message">
+        May every wish you make today come true. You deserve the world, and I’ll always be here to remind you of that. 💕
+    </div>
+</div>
+
+<script>
+const tapArea = document.getElementById("tapArea");
+const message = document.getElementById("message");
+
+tapArea.addEventListener("click", () => {
+    message.style.display = "block";
+    tapArea.style.display = "none";
+
+    // create floating confetti inside card
+    for (let i = 0; i < 25; i++) {
+        createFalling();
+    }
+});
+
+function createFalling() {
+    const item = document.createElement("div");
+    item.classList.add("fall");
+
+    const emojis = ["💖", "🎉", "✨", "🎈", "💝"];
+    item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const card = document.querySelector(".card");
+    const cardWidth = card.offsetWidth;
+    const cardHeight = card.offsetHeight;
+
+    item.style.left = Math.random() * (cardWidth - 20) + "px";
+    item.style.top = Math.random() * (cardHeight - 20) + "px";
+
+    card.appendChild(item);
+
+    setTimeout(() => {
+        item.remove();
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
