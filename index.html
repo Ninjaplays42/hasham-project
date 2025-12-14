@@ -141,7 +141,7 @@ body{
     color:#8b0055;
 }
 
-/* Black page and sprinkles (same as before) */
+/* Black page and sprinkles */
 #forYouPage{
     display:none;
     position:absolute;
@@ -204,7 +204,12 @@ audio{
 </style>
 </head>
 <body>
-
+<!-- START BUTTON OVERLAY -->
+<div id="startPage" style="position:absolute;inset:0;background:#c71585;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:50;">
+    <button id="startBtn" style="padding:20px 40px;font-size:24px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(45deg,#ff4fd8,#7b5cff);color:#fff;">
+        Start Surprise 🎉
+    </button>
+</div>
 
 <!-- INTRO TEXT SEQUENCE -->
 <div id="intro">
@@ -213,7 +218,6 @@ audio{
     <div class="intro-text">Beautiful 💖</div>
     <div class="intro-text">Person's Birthday 🎉</div>
 </div>
-
 
 <!-- Countdown -->
 <div id="cooldown">
@@ -237,6 +241,9 @@ audio{
     <button id="letsCelebrate">Let’s Celebrate ✨</button>
 </div>
 
+<!-- AUDIO -->
+<audio id="birthdaySong" src="song.mp3" autoplay loop></audio>
+
 <script>
 /* ELEMENTS */
 const intro = document.getElementById("intro");
@@ -244,6 +251,9 @@ const texts = document.querySelectorAll(".intro-text");
 const cooldown = document.getElementById("cooldown");
 const forYouPage = document.getElementById("forYouPage");
 const secEl = document.getElementById("seconds");
+const startBtn = document.getElementById("startBtn");
+const startPage = document.getElementById("startPage");
+const birthdaySong = document.getElementById("birthdaySong");
 
 /* INTRO TEXT SEQUENCE */
 let index = 0;
@@ -262,9 +272,6 @@ function playIntroText() {
 
     setTimeout(playIntroText, 3000);
 }
-
-/* START INTRO */
-playIntroText();
 
 /* COUNTDOWN LOGIC */
 function startCountdown() {
@@ -312,8 +319,19 @@ document.getElementById("letsCelebrate").onclick = () => {
     window.location.href = "page2.html";
 };
 
+/* START BUTTON CLICK */
+startBtn.addEventListener("click", () => {
+    // Hide the start overlay
+    startPage.style.display = "none";
+
+    // Play the birthday song
+    birthdaySong.play();
+
+    // Start the intro animation
+    playIntroText();
+});
+
 </script>
 
 </body>
 </html>
-
