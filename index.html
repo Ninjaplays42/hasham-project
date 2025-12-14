@@ -122,6 +122,37 @@ body{
 
 
 /* BLACK PAGE (FIXED) */
+/* Sprinkles container */
+.sprinkles{
+    position:absolute;
+    inset:0;           /* cover the whole black page */
+    pointer-events:none; /* allow clicks on button */
+    overflow:hidden;
+    z-index:5;
+}
+
+/* Each sprinkle */
+.sprinkle{
+    position:absolute;
+    width:4px;           /* will be randomized via JS */
+    height:4px;          /* will be randomized via JS */
+    border-radius:50%;    /* make it a circle */
+    opacity:0.9;
+    animation:fallSprinkle linear infinite;
+}
+
+/* Falling animation */
+@keyframes fallSprinkle{
+    0%{
+        transform: translateY(-10px);
+        opacity:1;
+    }
+    100%{
+        transform: translateY(100vh);
+        opacity:0;
+    }
+}
+
 #forYouPage{
     display:none;          /* ONLY this */
     position:absolute;
@@ -152,7 +183,8 @@ body{
 }
 
 
-/* Gradient Gift Icon Circle */
+
+/* Gift Icon Circle */
 .gift-icon{
     width:130px;
     height:130px;
@@ -163,10 +195,14 @@ body{
     align-items:center;
     font-size:48px;
     color:white;
-    box-shadow:
-        0 0 25px rgba(255,79,216,0.8),
-        0 0 45px rgba
-    }
+    box-shadow:0 0 25px rgba(255,79,216,0.8), 0 0 45px rgba(123,92,255,0.6);
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.08)}
+    100%{transform:scale(1)}
+}
 
 
 #letsCelebrate{
@@ -219,6 +255,10 @@ body{
 
 <!-- BLACK PAGE -->
 <div id="forYouPage">
+
+    <!-- Sprinkles container -->
+    <div class="sprinkles"></div>
+
     <div class="fallers">
         <span style="left:10%">🎉</span>
         <span style="left:30%">🎈</span>
@@ -260,6 +300,25 @@ setTimeout(()=>{
     },1000);
 
 },3000);
+/* Sprinkles generator */
+function createSprinkles(count){
+    const container = document.querySelector(".sprinkles");
+    const colors = ["#ff4fd8","#7b5cff","#ffea4f","#4fffab","#ff6b6b"];
+    for(let i=0;i<count;i++){
+        const span = document.createElement("span");
+        span.classList.add("sprinkle");
+        span.style.left = Math.random()*100 + "%"; // random horizontal position
+        span.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+        span.style.width = span.style.height = 4 + Math.random()*6 + "px"; // random size
+        span.style.animationDuration = 3 + Math.random()*2 + "s"; // random speed
+        span.style.animationDelay = Math.random()*2 + "s"; // random start
+        container.appendChild(span);
+    }
+}
+
+/* Call after black page appears */
+createSprinkles(50);  // create 50 sprinkles
+
 
 document.getElementById("letsCelebrate").onclick=()=>{
     window.location.href="page2.html";
@@ -268,4 +327,3 @@ document.getElementById("letsCelebrate").onclick=()=>{
 
 </body>
 </html>
-
