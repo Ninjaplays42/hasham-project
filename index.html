@@ -4,105 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise</title>
-<link rel="stylesheet" href="page1.css">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #C71585;
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    
-}
-    
-/* Floating Stickers Container */
-.stickers{
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* no click issues */
-    overflow: hidden;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
 }
 
-/* Sticker style */
-.stickers span{
-    position: absolute;
-    bottom: -40px;
-    font-size: 24px;
-    animation: floatUp 8s linear infinite;
-    opacity: 0.8;
+body{
+    background:#c71585;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
 }
 
-/* Float from bottom to top */
-@keyframes floatUp{
-    0%{
-        transform: translateY(0) scale(0.8);
-        opacity: 0;
-    }
-    10%{
-        opacity: 1;
-    }
-    100%{
-        transform: translateY(-120vh) scale(1.2);
-        opacity: 0;
-    }
+/* POPUP */
+#popup{
+    width:280px;
+    height:280px;
+    background:linear-gradient(145deg,#ff4b6e,#ff1a1a);
+    border-radius:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    z-index:5;
+}
+#popup{
+    position: relative;   /* REQUIRED */
+    overflow: hidden;     /* keeps hearts inside */
 }
 
 
-
-#popup {
-    width: 280px;
-    height: 280px;
-    background: linear-gradient(145deg, #ff4b6e, #ff1a1a);
-    border-radius: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    animation: popupEntrance 0.6s ease-out;
-    position: relative;  /* ADD THIS */
-    overflow: hidden;    /* ADD THIS */
+.popup-content h2{
+    background:linear-gradient(90deg,#ffe0f0,#ff1493);
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.popup-content p{color:#fff}
+/* Floating Hearts in Popup */
+.heart{
+    position:absolute;
+    bottom:20px;
+    font-size:22px;
+    animation: floatHeart 2.5s ease-in-out infinite;
+    opacity:0.9;
 }
 
-.popup-content h2 {
-    font-size: 20px;
-    background: linear-gradient(90deg, #ffe0f0, #ff1493);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+@keyframes floatHeart{
+    0%{transform:translateY(0) scale(1)}
+    50%{transform:translateY(-30px) scale(1.1)}
+    100%{transform:translateY(0) scale(1)}
 }
-
-.popup-content p {
-    color: #fff;
-}
-
-/* Balloons */
-.balloon {
-    position: absolute;   /* stay inside popup */
-    bottom: 20px;         /* distance from bottom */
-    font-size: 24px;
-    animation: floatBalloon 2.5s ease-in-out infinite;
-}
-
-
-
-/* Add float animation */
-@keyframes floatBalloon {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-    50% { transform: translateY(-50px) rotate(10deg); opacity: 1; }
-    100% { transform: translateY(0) rotate(-5deg); opacity: 0.8; }
-}
-
-
 
 
 /* COOLDOWN (UPDATED) */
@@ -156,98 +117,68 @@ body {
     color:#8b0055;
 }
 
-/* FOR YOU BUTTON (UNCHANGED) */
-#forYouBtn {
-    display: none;
-    margin-top: 15px;
-    padding: 14px 36px;
-    border: none;
-    border-radius: 50px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background: linear-gradient(135deg, #ff4b6e, #b07aff);
-    letter-spacing: 1px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(255,75,110,0.45);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+/* BLACK PAGE (FIXED) */
+#forYouPage{
+    display:none;          /* ONLY this */
+    position:absolute;
+    inset:0;
+    background:#000;
+    color:#fff;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    z-index:10;
 }
 
-/* Glow + lift */
-#forYouBtn:hover {
-    transform: translateY(-4px) scale(1.08);
+/* Falling Stickers */
+.fallers{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+.fallers span{
+    position:absolute;
+    top:-40px;
+    font-size:26px;
+    animation:fall 4s linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(120vh) rotate(360deg)}
+}
+
+
+/* Gradient Gift Icon Circle */
+.gift-icon{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff4fd8,#7b5cff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:48px;
+    color:white;
     box-shadow:
-        0 12px 30px rgba(255,75,110,0.7),
-        0 0 20px rgba(255,255,255,0.5);
-}
-
-/* Light sweep animation */
-#forYouBtn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 120%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.6),
-        transparent
-    );
-    transition: 0.6s;
-}
-
-#forYouBtn:hover::before {
-    left: 120%;
-}
-
-/* Emoji wiggle */
-#forYouBtn span {
-    display: inline-block;
-    animation: none;
-}
-
-#forYouBtn:hover span {
-    animation: giftWiggle 0.6s ease-in-out infinite alternate;
-}
-
-/* Keyframes */
-@keyframes giftWiggle {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(-6deg) scale(1.1); }
-    100% { transform: rotate(6deg) scale(1.15); }
-}
+        0 0 25px rgba(255,79,216,0.8),
+        0 0 45px rgba
+    }
 
 
-@keyframes floatBalloon {
-    0% {transform:translateY(0)}
-    50% {transform:translateY(-25px)}
-    100% {transform:translateY(0)}
-}
-@keyframes popupEntrance {
-    from {transform:scale(.8);opacity:0}
-    to {transform:scale(1);opacity:1}
+#letsCelebrate{
+    padding:14px 40px;
+    border:none;
+    border-radius:50px;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
-<!-- Floating Stickers -->
-<div class="stickers">
-    <span style="left:10%; animation-delay:0s;">🎈</span>
-    <span style="left:25%; animation-delay:2s;">🎉</span>
-    <span style="left:40%; animation-delay:4s;">💖</span>
-    <span style="left:55%; animation-delay:1s;">🎂</span>
-    <span style="left:70%; animation-delay:3s;">✨</span>
-    <span style="left:85%; animation-delay:5s;">🎁</span>
-</div>
 
-<!-- Flowers for For You Page -->
-<img id="flowerLeft" class="forYouFlower left" src="flowers.png">
-<img id="flowerRight" class="forYouFlower right" src="flowers.png">
 
 
 <!-- POPUP -->
@@ -255,14 +186,16 @@ body {
     <div class="popup-content">
         <h2>✨ Something Special for You ✨</h2>
         <p>Loading a magical surprise... 🎁</p>
-        <div class="balloon" style="left:10%; animation-delay:0s;">❤️</div>
-        <div class="balloon" style="left:30%; animation-delay:0.2s;">🖤</div>
-        <div class="balloon" style="left:50%; animation-delay:0.4s;">🤍</div>
-        <div class="balloon" style="left:70%; animation-delay:0.6s;">🧡</div>
-        
-
     </div>
+
+    <!-- Hearts INSIDE popup -->
+    <span class="heart" style="left:10%; animation-delay:0s;">❤️</span>
+    <span class="heart" style="left:30%; animation-delay:0.3s;">🖤</span>
+    <span class="heart" style="left:50%; animation-delay:0.6s;">🤍</span>
+    <span class="heart" style="left:70%; animation-delay:0.9s;">🧡</span>
 </div>
+
+
 
 <!-- COOLDOWN (DECORATIVE) -->
 <div id="cooldown">
@@ -281,46 +214,54 @@ body {
     </div>
 </div>
 
-<div class="forYouWrap">
-   
-    <button id="forYouBtn">
-        <span>For You 🎁</span>
-        <small>Tap & open your surprise</small>
-    </button>
+<!-- BLACK PAGE -->
+<div id="forYouPage">
+    <div class="fallers">
+        <span style="left:10%">🎉</span>
+        <span style="left:30%">🎈</span>
+        <span style="left:50%">✨</span>
+        <span style="left:70%">🎁</span>
+        <span style="left:85%">💖</span>
+    </div>
+
+    <div class="gift-icon">
+    🎁
+      </div>
+
+
+    <h1>Time to Celebrate 🎉</h1>
+    <button id="letsCelebrate">Let’s Celebrate ✨</button>
 </div>
 
-
 <script>
-const btn = document.getElementById("forYouBtn");
+const popup = document.getElementById("popup");
+const cooldown = document.getElementById("cooldown");
+const forYouPage = document.getElementById("forYouPage");
+const secEl = document.getElementById("seconds");
 
-setTimeout(() => {
-    popup.style.display = "none";
-    cooldown.style.display = "block";
+/* Popup for 3s → Counter for 5s → Black page */
+setTimeout(()=>{
+    popup.style.display="none";
+    cooldown.style.display="block";
 
     let sec = 5;
-    const secEl = document.getElementById("seconds");
-
-    const timer = setInterval(() => {
+    const timer = setInterval(()=>{
         sec--;
         secEl.innerText = sec;
-        if (sec === 0) {
+
+        if(sec === 0){
             clearInterval(timer);
-            cooldown.style.display = "none";
-            btn.style.display = "block";
-
-/* Show flowers */
-document.getElementById("flowerLeft").style.display = "block";
-document.getElementById("flowerRight").style.display = "block";
-
+            cooldown.style.display="none";
+            forYouPage.style.display="flex";  // ONLY NOW it shows
         }
-    }, 1000);
-}, 5000);
+    },1000);
 
-btn.onclick = () => {
-    window.location.href = "page2.html";
+},3000);
+
+document.getElementById("letsCelebrate").onclick=()=>{
+    window.location.href="page2.html";
 };
 </script>
 
 </body>
-
 </html>
