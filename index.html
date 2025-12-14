@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise</title>
-<link href="page1.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-
 <style>
 *{
     margin:0;
@@ -14,7 +12,6 @@
     box-sizing:border-box;
     font-family:"Poppins",sans-serif;
 }
-
 body{
     background:#c71585;
     height:100vh;
@@ -23,53 +20,83 @@ body{
     align-items:center;
     overflow:hidden;
     position:relative;
-     background-image: url(page1-bg.jpg);
+    background-image: url(page1-bg.jpg);
     background-size: cover;
-    
 }
-
-/* POPUP */
-#popup{
-    width:280px;
-    height:280px;
-    background:linear-gradient(145deg,#ff4b6e,#ff1a1a);
-    border-radius:25px;
+/* BLACK BACKGROUND FOR INTRO */
+#intro{
+    position:absolute;
+    inset:0;
+    background:#000;
     display:flex;
     justify-content:center;
     align-items:center;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    z-index:20;
+    overflow:hidden;
+}
+
+/* INTRO TEXT */
+.intro-text{
+    position:absolute;
+    font-size:32px;
+    font-weight:600;
+    font-family: Georgia, 'Times New Roman', Times, serif, Helvetica, sans-serif;
+    color:#fff;
+    opacity:0;
+    transform:translateX(-120%);
+    white-space:nowrap;
+}
+
+/* SLIDE IN → DROP OUT */
+@keyframes slideInDropOut{
+    0%{
+        opacity:0;
+        transform:translateX(-120%) translateY(0);
+    }
+    30%{
+        opacity:1;
+        transform:translateX(0) translateY(0);
+    }
+    60%{
+        opacity:1;
+        transform:translateX(0) translateY(0);
+    }
+    100%{
+        opacity:0;
+        transform:translateX(0) translateY(120vh);
+    }
+}
+
+/* Popup Container */
+#popupContainer{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
     z-index:5;
 }
-#popup{
-    position: relative;   /* REQUIRED */
-    overflow: hidden;     /* keeps hearts inside */
+
+/* Each animated message */
+.popup-message{
+    font-size:28px;
+    font-weight:600;
+    color:#fff;
+    opacity:0;
+    transform:translateX(-100%);
+    text-align:center;
+    margin-bottom:15px;
 }
 
-
-.popup-content h2{
-    background:linear-gradient(90deg,#ffe0f0,#ff1493);
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-.popup-content p{color:#fff}
-/* Floating Hearts in Popup */
-.heart{
-    position:absolute;
-    bottom:20px;
-    font-size:22px;
-    animation: floatHeart 2.5s ease-in-out infinite;
-    opacity:0.9;
+/* Animate from left to center then drop */
+@keyframes slideDrop{
+    0%{opacity:0; transform:translateX(-100%) translateY(0);}
+    50%{opacity:1; transform:translateX(0) translateY(0);}
+    100%{opacity:1; transform:translateX(0) translateY(50px);}
 }
 
-@keyframes floatHeart{
-    0%{transform:translateY(0) scale(1)}
-    50%{transform:translateY(-30px) scale(1.1)}
-    100%{transform:translateY(0) scale(1)}
-}
-
-
-/* COOLDOWN (UPDATED) */
+/* Countdown styling */
 #cooldown {
     display: none;
     width: 90%;
@@ -80,38 +107,32 @@ body{
     text-align: center;
     box-shadow: 0 15px 30px rgba(0,0,0,.35);
 }
-
 .cd-title{
     font-size:18px;
     color:#c71585;
     margin-bottom:15px;
 }
-
 .time-boxes{
     display:flex;
     gap:10px;
     margin-bottom:15px;
 }
-
 .time-box{
     flex:1;
     background:#ffe6f2;
     border-radius:16px;
     padding:12px 5px;
 }
-
 .time-box span{
     display:block;
     font-size:26px;
     font-weight:700;
     color:#c71585;
 }
-
 .time-box p{
     font-size:12px;
     color:#8b0055;
 }
-
 .cd-message{
     background:#fff0f7;
     border-radius:15px;
@@ -120,41 +141,9 @@ body{
     color:#8b0055;
 }
 
-
-/* BLACK PAGE (FIXED) */
-/* Sprinkles container */
-.sprinkles{
-    position:absolute;
-    inset:0;           /* cover the whole black page */
-    pointer-events:none; /* allow clicks on button */
-    overflow:hidden;
-    z-index:5;
-}
-
-/* Each sprinkle */
-.sprinkle{
-    position:absolute;
-    width:4px;           /* will be randomized via JS */
-    height:4px;          /* will be randomized via JS */
-    border-radius:50%;    /* make it a circle */
-    opacity:0.9;
-    animation:fallSprinkle linear infinite;
-}
-
-/* Falling animation */
-@keyframes fallSprinkle{
-    0%{
-        transform: translateY(-10px);
-        opacity:1;
-    }
-    100%{
-        transform: translateY(100vh);
-        opacity:0;
-    }
-}
-
+/* Black page and sprinkles (same as before) */
 #forYouPage{
-    display:none;          /* ONLY this */
+    display:none;
     position:absolute;
     inset:0;
     background:#000;
@@ -165,26 +154,25 @@ body{
     gap:25px;
     z-index:10;
 }
-
-/* Falling Stickers */
-.fallers{
+.sprinkles{
     position:absolute;
     inset:0;
     pointer-events:none;
+    overflow:hidden;
+    z-index:5;
 }
-.fallers span{
+.sprinkle{
     position:absolute;
-    top:-40px;
-    font-size:26px;
-    animation:fall 4s linear infinite;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    opacity:0.9;
+    animation:fallSprinkle linear infinite;
 }
-@keyframes fall{
-    to{transform:translateY(120vh) rotate(360deg)}
+@keyframes fallSprinkle{
+    0%{transform: translateY(-10px); opacity:1;}
+    100%{transform: translateY(100vh); opacity:0;}
 }
-
-
-
-/* Gift Icon Circle */
 .gift-icon{
     width:130px;
     height:130px;
@@ -195,7 +183,6 @@ body{
     align-items:center;
     font-size:48px;
     color:white;
-    box-shadow:0 0 25px rgba(255,79,216,0.8), 0 0 45px rgba(123,92,255,0.6);
     animation:pulse 2s infinite;
 }
 @keyframes pulse{
@@ -203,8 +190,6 @@ body{
     50%{transform:scale(1.08)}
     100%{transform:scale(1)}
 }
-
-
 #letsCelebrate{
     padding:14px 40px;
     border:none;
@@ -215,108 +200,115 @@ body{
 }
 </style>
 </head>
-
 <body>
 
 
-
-<!-- POPUP -->
-<div id="popup">
-    <div class="popup-content">
-        <h2>✨ Something Special for You ✨</h2>
-        <p>Loading a magical surprise... 🎁</p>
-    </div>
-
-    <!-- Hearts INSIDE popup -->
-    <span class="heart" style="left:10%; animation-delay:0s;">❤️</span>
-    <span class="heart" style="left:30%; animation-delay:0.3s;">🖤</span>
-    <span class="heart" style="left:50%; animation-delay:0.6s;">🤍</span>
-    <span class="heart" style="left:70%; animation-delay:0.9s;">🧡</span>
+<!-- INTRO TEXT SEQUENCE -->
+<div id="intro">
+    <div class="intro-text">Ohhh! 😮</div>
+    <div class="intro-text">It's 16 December 🎂</div>
+    <div class="intro-text">Beautiful 💖</div>
+    <div class="intro-text">Person's Birthday 🎉</div>
 </div>
 
 
-
-<!-- COOLDOWN (DECORATIVE) -->
+<!-- Countdown -->
 <div id="cooldown">
     <div class="cd-title">Your Special Day is Almost Here 💖</div>
-
     <div class="time-boxes">
         <div class="time-box"><span>0</span><p>Days 💕</p></div>
         <div class="time-box"><span>0</span><p>Hours 🎁</p></div>
         <div class="time-box"><span>0</span><p>Minutes 🎂</p></div>
         <div class="time-box"><span id="seconds">5</span><p>Seconds ⭐</p></div>
     </div>
-
     <div class="cd-message">
-        Just a little more…  
-        <br>A small gift for my favorite person 💗
+        Just a little more…<br>A small gift for my favorite person 💗
     </div>
 </div>
 
 <!-- BLACK PAGE -->
 <div id="forYouPage">
-
-    <!-- Sprinkles container -->
     <div class="sprinkles"></div>
-
-    
-
-    <div class="gift-icon">
-    🎁
-      </div>
-
-
+    <div class="gift-icon">🎁</div>
     <h1>Time to Celebrate 🎉</h1>
     <button id="letsCelebrate">Let’s Celebrate ✨</button>
 </div>
 
 <script>
-const popup = document.getElementById("popup");
+/* ELEMENTS */
+const intro = document.getElementById("intro");
+const texts = document.querySelectorAll(".intro-text");
 const cooldown = document.getElementById("cooldown");
 const forYouPage = document.getElementById("forYouPage");
 const secEl = document.getElementById("seconds");
 
-/* Popup for 3s → Counter for 5s → Black page */
-setTimeout(()=>{
-    popup.style.display="none";
-    cooldown.style.display="block";
+/* INTRO TEXT SEQUENCE */
+let index = 0;
+
+function playIntroText() {
+    if (index >= texts.length) {
+        // Intro finished
+        intro.style.display = "none";
+        startCountdown();
+        return;
+    }
+
+    const currentText = texts[index];
+    currentText.style.animation = "slideInDropOut 2.8s forwards";
+    index++;
+
+    setTimeout(playIntroText, 3000);
+}
+
+/* START INTRO */
+playIntroText();
+
+/* COUNTDOWN LOGIC */
+function startCountdown() {
+    cooldown.style.display = "block";
 
     let sec = 5;
-    const timer = setInterval(()=>{
+    secEl.innerText = sec;
+
+    const timer = setInterval(() => {
         sec--;
         secEl.innerText = sec;
 
-        if(sec === 0){
+        if (sec === 0) {
             clearInterval(timer);
-            cooldown.style.display="none";
-            forYouPage.style.display="flex";  // ONLY NOW it shows
-        }
-    },1000);
+            cooldown.style.display = "none";
+            forYouPage.style.display = "flex";
 
-},3000);
-/* Sprinkles generator */
-function createSprinkles(count){
+            // start sprinkles ONLY when black page appears
+            createSprinkles(60);
+        }
+    }, 1000);
+}
+
+/* SPRINKLES GENERATOR */
+function createSprinkles(count) {
     const container = document.querySelector(".sprinkles");
-    const colors = ["#ff4fd8","#7b5cff","#ffea4f","#4fffab","#ff6b6b"];
-    for(let i=0;i<count;i++){
-        const span = document.createElement("span");
-        span.classList.add("sprinkle");
-        span.style.left = Math.random()*100 + "%"; // random horizontal position
-        span.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-        span.style.width = span.style.height = 4 + Math.random()*6 + "px"; // random size
-        span.style.animationDuration = 3 + Math.random()*2 + "s"; // random speed
-        span.style.animationDelay = Math.random()*2 + "s"; // random start
-        container.appendChild(span);
+    const colors = ["#ff4fd8", "#7b5cff", "#ffea4f", "#4fffab", "#ff6b6b"];
+
+    for (let i = 0; i < count; i++) {
+        const s = document.createElement("span");
+        s.className = "sprinkle";
+        s.style.left = Math.random() * 100 + "%";
+        s.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        const size = 4 + Math.random() * 6;
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.animationDuration = 3 + Math.random() * 2 + "s";
+        s.style.animationDelay = Math.random() * 2 + "s";
+        container.appendChild(s);
     }
 }
 
-/* Call after black page appears */
-createSprinkles(50);  // create 50 sprinkles
-
-
-document.getElementById("letsCelebrate").onclick=()=>{
-    window.location.href="page2.html";
+/* BUTTON NAVIGATION */
+document.getElementById("letsCelebrate").onclick = () => {
+    window.location.href = "page2.html";
 };
+
 </script>
 
 </body>
