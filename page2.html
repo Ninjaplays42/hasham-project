@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Card</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-
 <style>
 body{
     margin:0;
@@ -19,79 +18,38 @@ body{
     overflow:hidden;
     position:relative;
 }
-.sparkles{
-    position:absolute;
-    top:200px;
-    width:100%;
-    text-align:center;
-    font-size:18px;
-    color:white;
-    z-index:1;
-    pointer-events:none;
-    opacity:.5;
-}
-.top-stickers span{
-    position:absolute;
-    top:-40px;
-    font-size:22px;
-    animation:floatDown 8s linear infinite;
-    opacity:.8;
-}
 
-@keyframes floatDown{
-    0%{transform:translateY(0) scale(.7);opacity:0}
-    10%{opacity:1}
-    100%{transform:translateY(120vh) scale(1.2);opacity:0}
-}
-.header {
-    position:absolute;
-    top:130px;
-    width:80%;
-    height: 40px;
-    text-align:center;
-    font-size:24px;
-    color:#fff;
-    font-weight:600;
-    text-shadow: 1px 1px 5px #000;
-    z-index:2;
-    background-color: rgb(255, 0, 0,0.5);
-    border-radius: 8px;
-}
-
-body::before{
-    content:"";
+/* Fireworks container */
+#fireworks-container{
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,0.3);
-    z-index:0;
+    pointer-events:none;
+    z-index:2;
+    display:none; /* hidden initially */
 }
 
-/* floating stickers */
-.stickers span{
+/* Balloons container */
+.balloons{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    display:none; /* hidden initially */
+}
+.balloons span{
     position:absolute;
     bottom:-40px;
-    font-size:22px;
-    animation:floatUp 9s linear infinite;
-    opacity:.8;
+    font-size:26px;
+    animation:floatUp linear forwards;
+    opacity:0.8;
 }
-
 @keyframes floatUp{
-    0%{transform:translateY(0) scale(.8);opacity:0}
-    10%{opacity:1}
-    100%{transform:translateY(-120vh) scale(1.2);opacity:0}
+    0%{transform:translateY(0) scale(0.8); opacity:0;}
+    10%{opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.2); opacity:0;}
 }
 
-/* bottom balloon */
-#baloon-1{
-    width:200px;
-    height:200px;
-    position:fixed;
-    bottom:15px;
-    background:url("baloon-fixed.png") no-repeat center/contain;
-    z-index:1;
-}
-
-/* CARD */
+/* Card */
 .card{
     width:92%;
     max-width:380px;
@@ -101,16 +59,15 @@ body::before{
     text-align:center;
     box-shadow:0 25px 45px rgba(0,0,0,.35);
     position:relative;
-    z-index:2;
+    z-index:3;
     animation:cardPop .6s ease;
 }
-
 @keyframes cardPop{
     from{transform:scale(.85);opacity:0}
     to{transform:scale(1);opacity:1}
 }
 
-/* happy birthday image */
+/* Happy Birthday image */
 #H-B{
     width:170px;
     height:95px;
@@ -118,7 +75,7 @@ body::before{
     background:url("happy-2.png") no-repeat center/contain;
 }
 
-/* TAP AREA */
+/* Tap Button */
 .tapArea{
     width:85%;
     margin:5px auto 18px;
@@ -138,13 +95,11 @@ body::before{
     overflow:hidden;
     animation:pulse 2.5s infinite;
 }
-
 @keyframes pulse{
     0%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
     50%{box-shadow:0 0 25px rgba(79,172,254,.9)}
     100%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
 }
-
 .tapArea::before{
     content:"";
     position:absolute;
@@ -152,17 +107,15 @@ body::before{
     background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
     animation:shine 2s infinite;
 }
-
 @keyframes shine{
     from{transform:translateX(-100%)}
     to{transform:translateX(100%)}
 }
-
 .tapArea i{
     font-size:28px;
 }
 
-/* MESSAGE */
+/* Message */
 .message{
     display:none;
     margin-top:14px;
@@ -172,13 +125,12 @@ body::before{
     padding:0 8px;
     animation:fadeIn .6s ease forwards;
 }
-
 @keyframes fadeIn{
     from{opacity:0;transform:scale(.95)}
     to{opacity:1;transform:scale(1)}
 }
 
-/* heart at bottom */
+/* Card heart */
 .card::after{
     content:"💖";
     position:absolute;
@@ -188,129 +140,96 @@ body::before{
     font-size:26px;
     animation:heartBeat 1.5s infinite;
 }
-
 @keyframes heartBeat{
     0%,100%{transform:translateX(-50%) scale(1)}
     50%{transform:translateX(-50%) scale(1.2)}
 }
 
-/* confetti */
-.fall{
+/* Fireworks animation */
+.firework{
     position:absolute;
-    font-size:22px;
-    animation:fall 3.5s linear forwards;
+    font-size:24px;
+    pointer-events:none;
+    animation:explode 1s ease-out forwards;
 }
-
-@keyframes fall{
-    from{transform:translateY(0) rotate(0);opacity:1}
-    to{transform:translateY(-140px) rotate(360deg);opacity:0}
-}
-
-@media(max-width:480px){
-    .tapArea{font-size:16px}
-    .message{font-size:14px}
-}
-/* Fireworks styling */
-.firework {
-    position: absolute;
-    font-size: 24px;
-    pointer-events: none;
-    animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode {
-    0% { transform: scale(0); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
+@keyframes explode{
+    0%{transform:scale(0); opacity:1;}
+    50%{transform:scale(1.5); opacity:1;}
+    100%{transform:scale(0); opacity:0;}
 }
 </style>
 </head>
 
 <body>
-    <!-- Fireworks container  -->
-<div id="fireworks-container"></div>
-<!-- sparkles -->
-    <div class="sparkles">
-    ✨ ✨ 💖 ✨ 💫 🎉
-</div>
-    <div class="top-stickers">
-    <span style="left:15%;animation-delay:0s">🎈</span>
-    <span style="left:50%;animation-delay:1s">✨</span>
-    <span style="left:75%;animation-delay:2s">🎉</span>
-</div>
-<div class="header">🎉 Happy Birthday 🎉</div>
-<!-- floating stickers -->
-<div class="stickers">
-    <span style="left:10%;animation-delay:0s">🎈</span>
-    <span style="left:25%;animation-delay:2s">🎉</span>
-    <span style="left:45%;animation-delay:4s">💖</span>
-    <span style="left:65%;animation-delay:1s">✨</span>
-    <span style="left:80%;animation-delay:3s">🎁</span>
-</div>
+    <!-- Fireworks -->
+    <div id="fireworks-container"></div>
 
-<div id="baloon-1"></div>
+    <!-- Balloons -->
+    <div class="balloons"></div>
 
-<div class="card">
-    <div id="H-B"></div>
+    <div class="card">
+        <div id="H-B"></div>
 
-    <div class="tapArea" id="tapArea">
-        <div>Tap to open your card</div>
-        <i>🎁</i>
+        <div class="tapArea" id="tapArea">
+            <div>Tap to open your card</div>
+            <i>🎁</i>
+        </div>
+
+        <div class="message" id="message">
+           May every wish you make today come true. You deserve the world, and I’ll always be here to remind you of that 💕✨
+        </div>
     </div>
-
-    <div class="message" id="message">
-        May every wish you make today come true.  
-        You deserve the world, and I’ll always be here  
-        to remind you of that 💕✨
-    </div>
-</div>
 
 <script>
 const tapArea = document.getElementById("tapArea");
 const message = document.getElementById("message");
+const fireworksContainer = document.getElementById("fireworks-container");
+const balloonsContainer = document.querySelector(".balloons");
 
 tapArea.onclick = () => {
+    // Hide button
     tapArea.style.display = "none";
+
+    // Show message
     message.style.display = "block";
 
-    for(let i=0;i<25;i++) spawn();
+    // Show fireworks and balloons containers
+    fireworksContainer.style.display = "block";
+    balloonsContainer.style.display = "block";
+
+    // Spawn fireworks every 500ms for 10s
+    const fireworkInterval = setInterval(spawnFirework, 500);
+    setTimeout(()=>clearInterval(fireworkInterval),10000);
+
+    // Spawn balloons continuously
+    spawnBalloons(50); // initial batch
+    setInterval(()=>spawnBalloons(10), 500);
 };
 
-function spawn(){
-    const d = document.createElement("div");
-    d.className = "fall";
-    d.innerText = ["💖","✨","🎉","🎈","💝"][Math.floor(Math.random()*5)];
-
-    const card = document.querySelector(".card");
-    d.style.left = Math.random()*(card.offsetWidth-20)+"px";
-    d.style.top = Math.random()*(card.offsetHeight-20)+"px";
-
-    card.appendChild(d);
-    setTimeout(()=>d.remove(),3500);
-}
-// Function to spawn a single firework
-function spawnFirework() {
-    const container = document.getElementById("fireworks-container");
+// Spawn a single firework
+function spawnFirework(){
     const firework = document.createElement("div");
     firework.className = "firework";
     const emojis = ["✨","💥","🎆","🎇","💫"];
     firework.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-
-    // Random position at the top area
-    firework.style.left = Math.random() * (window.innerWidth - 30) + "px";
+    firework.style.left = Math.random() * (window.innerWidth-30) + "px";
     firework.style.top = Math.random() * 150 + "px";
-
-    container.appendChild(firework);
-
-    // Remove after animation
-    setTimeout(() => firework.remove(), 1000);
+    fireworksContainer.appendChild(firework);
+    setTimeout(()=>firework.remove(),1000);
 }
 
-// Spawn fireworks every 500ms
-setInterval(spawnFirework, 500);
-
+// Spawn balloons
+function spawnBalloons(count){
+    const emojis = ["🎈","🎉","💖","🎁","✨"];
+    for(let i=0;i<count;i++){
+        const span = document.createElement("span");
+        span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left = Math.random()*90 + "%";
+        span.style.animationDuration = (4 + Math.random()*3) + "s";
+        balloonsContainer.appendChild(span);
+        setTimeout(()=>span.remove(),7000);
+    }
+}
 </script>
-
 </body>
 </html>
-
