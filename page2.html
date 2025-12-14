@@ -170,10 +170,39 @@ body{
     50%{transform:scale(1.5); opacity:1;}
     100%{transform:scale(0); opacity:0;}
 }
+.header {
+    position:absolute;
+    top:20px;
+    width:80%;
+    height: 40px;
+    text-align:center;
+    font-size:24px;
+    color:#fff;
+    font-weight:600;
+    text-shadow: 1px 1px 5px #000;
+    z-index:2;
+    background-color: rgb(255, 0, 0,0.3);
+    border-radius: 10px;
+    
+}
+#baloon-1{
+    height: 230px;
+    width: 230px;
+    background-color:transparent;
+    position: fixed;
+    bottom: 30px;
+    background-image: url(baloon-fixed.png);
+    background-size: contain;
+    
+   
+   
+}
+
 </style>
 </head>
 
 <body>
+    <div class="header">🎉 Happy Birthday 🎉</div>
     <!-- Fireworks -->
     <div id="fireworks-container"></div>
 
@@ -195,7 +224,7 @@ body{
             May every wish you make today come true. 💕✨
         </div>
     </div>
-
+<div id="baloon-1"></div>
 <script>
 const tapArea = document.getElementById("tapArea");
 const message = document.getElementById("message");
