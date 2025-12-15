@@ -47,6 +47,20 @@ body{
     transform:translateX(-120%);
     white-space:nowrap;
 }
+#guess{
+    height: 70px;
+    width: 200px;
+    background-color: rgb(255, 255, 255);
+    font-size:24px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(45deg,#702419,#fc0202);color:#fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#or{
+    background-color: red;
+    margin-top: 10px;
+    border-radius: 20px;
+}
 
 /* SLIDE IN → DROP OUT */
 @keyframes slideInDropOut{
@@ -380,8 +394,10 @@ button.loader-btn:hover{transform:scale(1.05);}
 <body>
 <!-- START BUTTON OVERLAY -->
 <div id="startPage" style="position:absolute;inset:0;background:#c71585;display:flex;justify-content:center;align-items:center;flex-direction:column;z-index:50;">
+    <h2 id="guess">Guess what</h2>
+    <h3 id="or">or</h3>
     <button id="startBtn" style="padding:20px 40px;font-size:24px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(45deg,#ff4fd8,#7b5cff);color:#fff;">
-        Start Surprise 🎉
+        tap here🎉
     </button>
 </div>
 
@@ -431,7 +447,10 @@ button.loader-btn:hover{transform:scale(1.05);}
             <i>🎁</i>
         </div>
         <div class="message" id="message">
-           Happy Birthday 🎉<br>Hope this year reminds you how special you truly are.💕✨
+          Happy  Birthday 🎉
+Hope this year reminds you how special you truly are.
+Your smile, your vibe, and the way you makes every day a little brighter.
+You’re special in a way that doesn’t need words—hope you feel it today.💕✨
         </div>
     </div>
     <div class="loader-box">
