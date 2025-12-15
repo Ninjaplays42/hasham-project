@@ -23,6 +23,7 @@ body{
     background-image: url(page1-bg.jpg);
     background-size: cover;
 }
+
 /* BLACK BACKGROUND FOR INTRO */
 #intro{
     position:absolute;
@@ -49,51 +50,10 @@ body{
 
 /* SLIDE IN → DROP OUT */
 @keyframes slideInDropOut{
-    0%{
-        opacity:0;
-        transform:translateX(-120%) translateY(0);
-    }
-    30%{
-        opacity:1;
-        transform:translateX(0) translateY(0);
-    }
-    60%{
-        opacity:1;
-        transform:translateX(0) translateY(0);
-    }
-    100%{
-        opacity:0;
-        transform:translateX(0) translateY(120vh);
-    }
-}
-
-/* Popup Container */
-#popupContainer{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:5;
-}
-
-/* Each animated message */
-.popup-message{
-    font-size:28px;
-    font-weight:600;
-    color:#fff;
-    opacity:0;
-    transform:translateX(-100%);
-    text-align:center;
-    margin-bottom:15px;
-}
-
-/* Animate from left to center then drop */
-@keyframes slideDrop{
-    0%{opacity:0; transform:translateX(-100%) translateY(0);}
-    50%{opacity:1; transform:translateX(0) translateY(0);}
-    100%{opacity:1; transform:translateX(0) translateY(50px);}
+    0%{opacity:0; transform:translateX(-120%) translateY(0);}
+    30%{opacity:1; transform:translateX(0) translateY(0);}
+    60%{opacity:1; transform:translateX(0) translateY(0);}
+    100%{opacity:0; transform:translateX(0) translateY(120vh);}
 }
 
 /* Countdown styling */
@@ -107,41 +67,14 @@ body{
     text-align: center;
     box-shadow: 0 15px 30px rgba(0,0,0,.35);
 }
-.cd-title{
-    font-size:18px;
-    color:#c71585;
-    margin-bottom:15px;
-}
-.time-boxes{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-}
-.time-box{
-    flex:1;
-    background:#ffe6f2;
-    border-radius:16px;
-    padding:12px 5px;
-}
-.time-box span{
-    display:block;
-    font-size:26px;
-    font-weight:700;
-    color:#c71585;
-}
-.time-box p{
-    font-size:12px;
-    color:#8b0055;
-}
-.cd-message{
-    background:#fff0f7;
-    border-radius:15px;
-    padding:12px;
-    font-size:14px;
-    color:#8b0055;
-}
+.cd-title{font-size:18px;color:#c71585;margin-bottom:15px;}
+.time-boxes{display:flex;gap:10px;margin-bottom:15px;}
+.time-box{flex:1;background:#ffe6f2;border-radius:16px;padding:12px 5px;}
+.time-box span{display:block;font-size:26px;font-weight:700;color:#c71585;}
+.time-box p{font-size:12px;color:#8b0055;}
+.cd-message{background:#fff0f7;border-radius:15px;padding:12px;font-size:14px;color:#8b0055;}
 
-/* Black page and sprinkles */
+/* BLACK PAGE */
 #forYouPage{
     display:none;
     position:absolute;
@@ -198,10 +131,8 @@ body{
     font-weight:bold;
     cursor:pointer;
 }
-audio{
-    display: none;
-}
-/* page 2 css */
+
+/* PAGE2 */
 #page2{
     margin:0;
     padding:0;
@@ -214,6 +145,8 @@ audio{
     overflow:hidden;
     position:absolute;
     inset:0;
+    flex-direction:column;
+    display:none;
 }
 
 /* Fireworks container */
@@ -222,7 +155,7 @@ audio{
     inset:0;
     pointer-events:none;
     z-index:2;
-    display:none; /* hidden initially */
+    display:none;
 }
 
 /* Balloons container */
@@ -231,7 +164,7 @@ audio{
     inset:0;
     pointer-events:none;
     z-index:1;
-    display:none; /* hidden initially */
+    display:none;
 }
 .balloons span{
     position:absolute;
@@ -305,11 +238,6 @@ audio{
     overflow:hidden;
     animation:pulse 2.5s infinite;
 }
-@keyframes pulse{
-    0%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
-    50%{box-shadow:0 0 25px rgba(79,172,254,.9)}
-    100%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
-}
 .tapArea::before{
     content:"";
     position:absolute;
@@ -367,9 +295,11 @@ audio{
     50%{transform:scale(1.5); opacity:1;}
     100%{transform:scale(0); opacity:0;}
 }
+
+/* Header */
 .header {
-    position:absolute;
-    top:20px;
+    position: absolute;
+    top: 100px;
     width:80%;
     height: 40px;
     text-align:center;
@@ -380,8 +310,9 @@ audio{
     z-index:2;
     background-color: rgb(255, 0, 0,0.3);
     border-radius: 10px;
-    
 }
+
+/* Balloon image */
 #baloon-1{
     height: 230px;
     width: 230px;
@@ -390,9 +321,59 @@ audio{
     bottom: 30px;
     background-image: url(baloon-fixed.png);
     background-size: contain;
-    
-   
-   
+}
+
+/* Beauty Loader */
+.loader-box{
+    width:320px;
+    height:230px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    margin-top:20px;
+}
+h3{
+    margin-bottom:15px;
+    font-size:20px;
+}
+.progress{
+    font-size:30px;
+    font-weight:bold;
+    display:none;
+    animation:pulse 1s infinite;
+}
+button.loader-btn{
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    font-size:15px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff512f,#f09819);
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+button.loader-btn:hover{transform:scale(1.05);}
+.error{
+    display:none;
+    font-size:20px;
+    font-weight:bold;
+    color:#ffeb3b;
+    animation:shake 0.5s infinite;
+}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    50%{transform:translateX(5px)}
+    75%{transform:translateX(-5px)}
+    100%{transform:translateX(0)}
 }
 </style>
 </head>
@@ -408,7 +389,7 @@ audio{
 <div id="intro">
     <div class="intro-text">Ohhh! 😮</div>
     <div class="intro-text">It's 16 December 🎂</div>
-    <div class="intro-text">Beautiful 💖</div>
+    <div class="intro-text"> A Beautiful 💖</div>
     <div class="intro-text">Person's Birthday 🎉</div>
 </div>
 
@@ -436,39 +417,34 @@ audio{
 
 <!-- AUDIO -->
 <audio id="birthdaySong" src="song.mp3" autoplay loop></audio>
-<!-- PAGE 2 (HIDDEN INITIALLY) -->
-<div id="page2" style="display:none; position:absolute; inset:0;">
-   
-     <div class="header">🎉 Happy Birthday 🎉</div>
-    <!-- Fireworks -->
+
+<!-- PAGE2 -->
+<div id="page2">
+    <div class="header">🎉 Happy Birthday 🎉</div>
     <div id="fireworks-container"></div>
-
-    <!-- Balloons -->
     <div class="balloons"></div>
-
     <div class="card">
         <div id="H-B"></div>
-
-        <!-- Card Stickers Container -->
         <div class="card-stickers"></div>
-
         <div class="tapArea" id="tapArea">
             <div>Tap to open your card</div>
             <i>🎁</i>
         </div>
-
         <div class="message" id="message">
-           Happy  Birthday 🎉
-Hope this year reminds you how special you truly are.
-Your smile, your vibe, and the way you makes every day a little brighter.
-You’re special in a way that doesn’t need words—hope you feel it today.💕✨
+           Happy Birthday 🎉<br>Hope this year reminds you how special you truly are.💕✨
         </div>
     </div>
-<div id="baloon-1"></div>
+    <div class="loader-box">
+        <h3 id="loader-title">💖 Measure Your Beauty</h3>
+        <div class="progress" id="progress">0%</div>
+        <div class="error" id="error">⚠ BEAUTY OVERLOADED!</div>
+        <button class="loader-btn" id="btn">Start</button>
+    </div>
+    
 </div>
 
 <script>
-/* ELEMENTS */
+// Intro animation
 const intro = document.getElementById("intro");
 const texts = document.querySelectorAll(".intro-text");
 const cooldown = document.getElementById("cooldown");
@@ -477,153 +453,109 @@ const secEl = document.getElementById("seconds");
 const startBtn = document.getElementById("startBtn");
 const startPage = document.getElementById("startPage");
 const birthdaySong = document.getElementById("birthdaySong");
-
-/* INTRO TEXT SEQUENCE */
 let index = 0;
-
 function playIntroText() {
-    if (index >= texts.length) {
-        // Intro finished
-        intro.style.display = "none";
-        startCountdown();
-        return;
-    }
-
-    const currentText = texts[index];
-    currentText.style.animation = "slideInDropOut 2.8s forwards";
+    if(index>=texts.length){ intro.style.display="none"; startCountdown(); return; }
+    texts[index].style.animation="slideInDropOut 2.8s forwards";
     index++;
-
-    setTimeout(playIntroText, 3000);
+    setTimeout(playIntroText,3000);
 }
-
-/* COUNTDOWN LOGIC */
-function startCountdown() {
-    cooldown.style.display = "block";
-
+function startCountdown(){
+    cooldown.style.display="block";
     let sec = 5;
-    secEl.innerText = sec;
-
-    const timer = setInterval(() => {
-        sec--;
-        secEl.innerText = sec;
-
-        if (sec === 0) {
-            clearInterval(timer);
-            cooldown.style.display = "none";
-            forYouPage.style.display = "flex";
-
-            // start sprinkles ONLY when black page appears
-            createSprinkles(60);
-        }
-    }, 1000);
+    secEl.innerText=sec;
+    const timer = setInterval(()=>{
+        sec--; secEl.innerText=sec;
+        if(sec===0){ clearInterval(timer); cooldown.style.display="none"; forYouPage.style.display="flex"; createSprinkles(60); }
+    },1000);
 }
-
-/* SPRINKLES GENERATOR */
-function createSprinkles(count) {
+function createSprinkles(count){
     const container = document.querySelector(".sprinkles");
-    const colors = ["#ff4fd8", "#7b5cff", "#ffea4f", "#4fffab", "#ff6b6b"];
-
-    for (let i = 0; i < count; i++) {
-        const s = document.createElement("span");
-        s.className = "sprinkle";
-        s.style.left = Math.random() * 100 + "%";
-        s.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        const size = 4 + Math.random() * 6;
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.animationDuration = 3 + Math.random() * 2 + "s";
-        s.style.animationDelay = Math.random() * 2 + "s";
+    const colors = ["#ff4fd8","#7b5cff","#ffea4f","#4fffab","#ff6b6b"];
+    for(let i=0;i<count;i++){
+        const s=document.createElement("span");
+        s.className="sprinkle";
+        s.style.left=Math.random()*100+"%";
+        s.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+        const size=4+Math.random()*6;
+        s.style.width=size+"px"; s.style.height=size+"px";
+        s.style.animationDuration=3+Math.random()*2+"s";
+        s.style.animationDelay=Math.random()*2+"s";
         container.appendChild(s);
     }
 }
-
-/* BUTTON NAVIGATION */
-document.getElementById("letsCelebrate").addEventListener("click", () => {
-    // hide page 1 content
-    document.getElementById("forYouPage").style.display = "none";
-
-    // show page 2
-    document.getElementById("page2").style.display = "flex";
-
-    // keep song playing (safety call)
+startBtn.addEventListener("click",()=>{startPage.style.display="none"; birthdaySong.play(); playIntroText();});
+document.getElementById("letsCelebrate").addEventListener("click",()=>{
+    forYouPage.style.display="none";
+    document.getElementById("page2").style.display="flex";
     birthdaySong.play();
 });
 
+// PAGE2 JS
+const tapArea=document.getElementById("tapArea");
+const message=document.getElementById("message");
+const fireworksContainer=document.getElementById("fireworks-container");
+const balloonsContainer=document.querySelector(".balloons");
+const cardStickersContainer=document.querySelector(".card-stickers");
 
-/* START BUTTON CLICK */
-startBtn.addEventListener("click", () => {
-    // Hide the start overlay
-    startPage.style.display = "none";
-
-    // Play the birthday song
-    birthdaySong.play();
-
-    // Start the intro animation
-    playIntroText();
-});
-// page2 js
-const tapArea = document.getElementById("tapArea");
-const message = document.getElementById("message");
-const fireworksContainer = document.getElementById("fireworks-container");
-const balloonsContainer = document.querySelector(".balloons");
-const cardStickersContainer = document.querySelector(".card-stickers");
-
-tapArea.onclick = () => {
-    tapArea.style.display = "none";
-    message.style.display = "block";
-
-    // Show fireworks and balloons containers
-    fireworksContainer.style.display = "block";
-    balloonsContainer.style.display = "block";
-
-    // Fireworks
-    const fireworkInterval = setInterval(spawnFirework, 500);
+tapArea.onclick=()=>{
+    tapArea.style.display="none";
+    message.style.display="block";
+    fireworksContainer.style.display="block";
+    balloonsContainer.style.display="block";
+    const fireworkInterval=setInterval(spawnFirework,500);
     setTimeout(()=>clearInterval(fireworkInterval),10000);
-
-    // Balloons from bottom
     spawnBalloons(50);
     setInterval(()=>spawnBalloons(10),500);
-
-    // Floating stickers around card
     spawnCardStickers(30);
 };
-
 function spawnFirework(){
-    const firework = document.createElement("div");
-    firework.className = "firework";
-    const emojis = ["✨","💥","🎆","🎇","💫"];
-    firework.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-    firework.style.left = Math.random() * (window.innerWidth-30) + "px";
-    firework.style.top = Math.random() * 150 + "px";
+    const firework=document.createElement("div");
+    firework.className="firework";
+    const emojis=["✨","💥","🎆","🎇","💫"];
+    firework.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    firework.style.left=Math.random()*(window.innerWidth-30)+"px";
+    firework.style.top=Math.random()*150+"px";
     fireworksContainer.appendChild(firework);
     setTimeout(()=>firework.remove(),1000);
 }
-
 function spawnBalloons(count){
-    const emojis = ["🎈","🎉","💖","🎁","✨"];
+    const emojis=["🎈","🎉","💖","🎁","✨"];
     for(let i=0;i<count;i++){
-        const span = document.createElement("span");
-        span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-        span.style.left = Math.random()*90 + "%";
-        span.style.animationDuration = (4 + Math.random()*3) + "s";
+        const span=document.createElement("span");
+        span.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left=Math.random()*90+"%";
+        span.style.animationDuration=(4+Math.random()*3)+"s";
         balloonsContainer.appendChild(span);
         setTimeout(()=>span.remove(),7000);
     }
 }
-
 function spawnCardStickers(count){
-    const emojis = ["💖","✨","🎉","🎈","💝"];
+    const emojis=["💖","✨","🎉","🎈","💝"];
     for(let i=0;i<count;i++){
-        const span = document.createElement("span");
-        span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-        span.style.left = Math.random()*80 + "%";
-        span.style.top = Math.random()*100 + "px";
-        span.style.animationDuration = (3 + Math.random()*2) + "s";
+        const span=document.createElement("span");
+        span.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left=Math.random()*80+"%";
+        span.style.top=Math.random()*100+"px";
+        span.style.animationDuration=(3+Math.random()*2)+"s";
         cardStickersContainer.appendChild(span);
         setTimeout(()=>span.remove(),4000);
     }
 }
-</script>
 
+// BEAUTY LOADER
+const loaderBtn=document.getElementById("btn");
+const loaderTitle=document.getElementById("loader-title");
+const progress=document.getElementById("progress");
+const error=document.getElementById("error");
+loaderBtn.onclick=function(){
+    let percent=0;
+    loaderBtn.style.display="none"; loaderTitle.style.display="none"; error.style.display="none"; progress.style.display="block";
+    const interval=setInterval(()=>{
+        percent+=10; progress.innerText=percent+"%";
+        if(percent>=120){ clearInterval(interval); progress.style.display="none"; error.style.display="block"; }
+    },350);
+};
+</script>
 </body>
 </html>
