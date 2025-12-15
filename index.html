@@ -201,6 +201,199 @@ body{
 audio{
     display: none;
 }
+/* page 2 css */
+#page2{
+    margin:0;
+    padding:0;
+    background:url("page2-bg.jpg") no-repeat center center/cover;
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:absolute;
+    inset:0;
+}
+
+/* Fireworks container */
+#fireworks-container{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+    display:none; /* hidden initially */
+}
+
+/* Balloons container */
+.balloons{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    display:none; /* hidden initially */
+}
+.balloons span{
+    position:absolute;
+    bottom:-40px;
+    font-size:26px;
+    animation:floatUp linear forwards;
+    opacity:0.8;
+}
+@keyframes floatUp{
+    0%{transform:translateY(0) scale(0.8); opacity:0;}
+    10%{opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.2); opacity:0;}
+}
+
+/* Floating stickers around card */
+.card-stickers span{
+    position:absolute;
+    font-size:22px;
+    animation:floatAround 4s linear forwards;
+    opacity:0.9;
+}
+@keyframes floatAround{
+    0%{transform:translateY(0) rotate(0deg); opacity:0;}
+    10%{opacity:1;}
+    100%{transform:translateY(-120px) rotate(360deg); opacity:0;}
+}
+
+/* Card */
+.card{
+    width:92%;
+    max-width:380px;
+    background:#fff;
+    border-radius:32px;
+    padding:30px 20px 45px;
+    text-align:center;
+    box-shadow:0 25px 45px rgba(0,0,0,.35);
+    position:relative;
+    z-index:3;
+    animation:cardPop .6s ease;
+}
+@keyframes cardPop{
+    from{transform:scale(.85);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+/* Happy Birthday image */
+#H-B{
+    width:170px;
+    height:95px;
+    margin:0 auto 22px;
+    background:url("happy-2.png") no-repeat center/contain;
+}
+
+/* Tap Button */
+.tapArea{
+    width:85%;
+    margin:5px auto 18px;
+    padding:28px 12px;
+    background:linear-gradient(135deg,#4facfe,#8f7bff);
+    border-radius:24px;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transform:rotate(-5deg);
+    box-shadow:0 15px 30px rgba(79,172,254,.55);
+    position:relative;
+    overflow:hidden;
+    animation:pulse 2.5s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
+    50%{box-shadow:0 0 25px rgba(79,172,254,.9)}
+    100%{box-shadow:0 0 0 rgba(79,172,254,0.6)}
+}
+.tapArea::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+    animation:shine 2s infinite;
+}
+@keyframes shine{
+    from{transform:translateX(-100%)}
+    to{transform:translateX(100%)}
+}
+.tapArea i{
+    font-size:28px;
+}
+
+/* Message */
+.message{
+    display:none;
+    margin-top:14px;
+    font-size:15px;
+    color:#7a006a;
+    line-height:1.7;
+    padding:0 8px;
+    animation:fadeIn .6s ease forwards;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:scale(.95)}
+    to{opacity:1;transform:scale(1)}
+}
+
+/* Card heart */
+.card::after{
+    content:"💖";
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:26px;
+    animation:heartBeat 1.5s infinite;
+}
+@keyframes heartBeat{
+    0%,100%{transform:translateX(-50%) scale(1)}
+    50%{transform:translateX(-50%) scale(1.2)}
+}
+
+/* Fireworks animation */
+.firework{
+    position:absolute;
+    font-size:24px;
+    pointer-events:none;
+    animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+    0%{transform:scale(0); opacity:1;}
+    50%{transform:scale(1.5); opacity:1;}
+    100%{transform:scale(0); opacity:0;}
+}
+.header {
+    position:absolute;
+    top:20px;
+    width:80%;
+    height: 40px;
+    text-align:center;
+    font-size:24px;
+    color:#fff;
+    font-weight:600;
+    text-shadow: 1px 1px 5px #000;
+    z-index:2;
+    background-color: rgb(255, 0, 0,0.3);
+    border-radius: 10px;
+    
+}
+#baloon-1{
+    height: 230px;
+    width: 230px;
+    background-color:transparent;
+    position: fixed;
+    bottom: 30px;
+    background-image: url(baloon-fixed.png);
+    background-size: contain;
+    
+   
+   
+}
 </style>
 </head>
 <body>
@@ -243,6 +436,36 @@ audio{
 
 <!-- AUDIO -->
 <audio id="birthdaySong" src="song.mp3" autoplay loop></audio>
+<!-- PAGE 2 (HIDDEN INITIALLY) -->
+<div id="page2" style="display:none; position:absolute; inset:0;">
+   
+     <div class="header">🎉 Happy Birthday 🎉</div>
+    <!-- Fireworks -->
+    <div id="fireworks-container"></div>
+
+    <!-- Balloons -->
+    <div class="balloons"></div>
+
+    <div class="card">
+        <div id="H-B"></div>
+
+        <!-- Card Stickers Container -->
+        <div class="card-stickers"></div>
+
+        <div class="tapArea" id="tapArea">
+            <div>Tap to open your card</div>
+            <i>🎁</i>
+        </div>
+
+        <div class="message" id="message">
+           Happy  Birthday 🎉
+Hope this year reminds you how special you truly are.
+Your smile, your vibe, and the way you makes every day a little brighter.
+You’re special in a way that doesn’t need words—hope you feel it today.💕✨
+        </div>
+    </div>
+<div id="baloon-1"></div>
+</div>
 
 <script>
 /* ELEMENTS */
@@ -315,9 +538,17 @@ function createSprinkles(count) {
 }
 
 /* BUTTON NAVIGATION */
-document.getElementById("letsCelebrate").onclick = () => {
-    window.location.href = "page2.html";
-};
+document.getElementById("letsCelebrate").addEventListener("click", () => {
+    // hide page 1 content
+    document.getElementById("forYouPage").style.display = "none";
+
+    // show page 2
+    document.getElementById("page2").style.display = "flex";
+
+    // keep song playing (safety call)
+    birthdaySong.play();
+});
+
 
 /* START BUTTON CLICK */
 startBtn.addEventListener("click", () => {
@@ -330,7 +561,68 @@ startBtn.addEventListener("click", () => {
     // Start the intro animation
     playIntroText();
 });
+// page2 js
+const tapArea = document.getElementById("tapArea");
+const message = document.getElementById("message");
+const fireworksContainer = document.getElementById("fireworks-container");
+const balloonsContainer = document.querySelector(".balloons");
+const cardStickersContainer = document.querySelector(".card-stickers");
 
+tapArea.onclick = () => {
+    tapArea.style.display = "none";
+    message.style.display = "block";
+
+    // Show fireworks and balloons containers
+    fireworksContainer.style.display = "block";
+    balloonsContainer.style.display = "block";
+
+    // Fireworks
+    const fireworkInterval = setInterval(spawnFirework, 500);
+    setTimeout(()=>clearInterval(fireworkInterval),10000);
+
+    // Balloons from bottom
+    spawnBalloons(50);
+    setInterval(()=>spawnBalloons(10),500);
+
+    // Floating stickers around card
+    spawnCardStickers(30);
+};
+
+function spawnFirework(){
+    const firework = document.createElement("div");
+    firework.className = "firework";
+    const emojis = ["✨","💥","🎆","🎇","💫"];
+    firework.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    firework.style.left = Math.random() * (window.innerWidth-30) + "px";
+    firework.style.top = Math.random() * 150 + "px";
+    fireworksContainer.appendChild(firework);
+    setTimeout(()=>firework.remove(),1000);
+}
+
+function spawnBalloons(count){
+    const emojis = ["🎈","🎉","💖","🎁","✨"];
+    for(let i=0;i<count;i++){
+        const span = document.createElement("span");
+        span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left = Math.random()*90 + "%";
+        span.style.animationDuration = (4 + Math.random()*3) + "s";
+        balloonsContainer.appendChild(span);
+        setTimeout(()=>span.remove(),7000);
+    }
+}
+
+function spawnCardStickers(count){
+    const emojis = ["💖","✨","🎉","🎈","💝"];
+    for(let i=0;i<count;i++){
+        const span = document.createElement("span");
+        span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left = Math.random()*80 + "%";
+        span.style.top = Math.random()*100 + "px";
+        span.style.animationDuration = (3 + Math.random()*2) + "s";
+        cardStickersContainer.appendChild(span);
+        setTimeout(()=>span.remove(),4000);
+    }
+}
 </script>
 
 </body>
